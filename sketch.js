@@ -6,6 +6,7 @@ let score = 0;
 let gameOver = false;
 let obstacleSpeed = 3
 let coinCollected=false
+let obstacleHits =0
 
 function setup() {
   createCanvas(400, 400);
@@ -129,6 +130,8 @@ function displayStats() {
   fill(0);
   textSize(16);
   text("Score: " + score, 10, 20);
+  text("Hits: " + obstacleHits, 150, 20);
+  text("Speed: " + obstacleSpeed, 290, 20);
   // TODO: Add display for hits and speed
 }
 

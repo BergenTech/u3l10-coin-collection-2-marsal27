@@ -5,6 +5,7 @@ let obstacleX, obstacleY;
 let score = 0;
 let gameOver = false;
 let obstacleSpeed = 3
+let coinCollected=false
 
 function setup() {
   createCanvas(400, 400);
@@ -20,7 +21,7 @@ function initializeGame() {
   newCoin();
   
   // Initialize obstacle position
-  obstacleX = 0;
+  obstacleX = random(0,width);
   obstacleY = random(20, height-20);
 }
 
@@ -54,8 +55,10 @@ function drawPlayer() {
 }
 
 function drawCoin() {
-  fill(255, 255, 0);  // Yellow coin
-  circle(coinX, coinY, 10);
+  if(!coinCollected){
+    fill(255, 255, 0);  // Yellow coin
+    circle(coinX, coinY, 10);
+  }
 }
 
 function drawObstacle() {
@@ -91,6 +94,9 @@ function moveObstacle() {
   // TODO: Move obstacle from left to right
   // HINT: Increase obstacleX by obstacleSpeed
   obstacleY+=obstacleSpeed
+  if(obstacleY>height){
+    obstacleY=0
+  }
   // TODO: Reset obstacle when it goes off screen
   // HINT: Check if obstacleX > width
   // Reset to left side and new random Y position
@@ -103,6 +109,7 @@ function checkCoinCollection() {
   //   - Increase score
   //   - Create new coin
   //   - Increase obstacle speed slightly
+  
 }
 
 function checkCollisions() {

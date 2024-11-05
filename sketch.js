@@ -23,7 +23,8 @@ function initializeGame() {
   
   // Initialize obstacle position
   obstacleX = random(0,width);
-  obstacleY = random(20, height-20);
+  // obstacleY = random(20, height-20);
+  obstacleY=0
 }
 
 function draw() {
@@ -124,6 +125,15 @@ function checkCollisions() {
   //   - Increase hits
   //   - Check for game over (hits >= 3)
   //   - Reset positions
+  if(dist(playerX,playerY,obstacleX,obstacleY)<20){
+    obstacleHits=obstacleHits+1
+    initializeGame()
+  }
+  if (obstacleHits>=3){
+    gameOver = true
+    resetGame()
+    displayGameOver()
+  }
 }
 
 function displayStats() {
@@ -142,6 +152,13 @@ function displayGameOver() {
   //   - "Game Over" message
   //   - Final score
   //   - "Press R to Restart"
+  textAlign(CENTER,CENTER)
+  textSize(45)
+  text("GAME OVER", width/2,height/2)
+  textSize(25)
+  text("Final score: " + score, width/2,height/2+50)
+  text(`Press "R" to restart`)
+  resetGame()
 }
 
 function newCoin() {
@@ -155,15 +172,34 @@ function resetGame() {
   // HINT: Reset score, hits, speed
   // Set gameOver to false
   // Call initializeGame()
+  if(gameOver){
+    score=0
+    obstacleHits=0
+    obstacleSpeed=3
+    gameOver=false
+    initializeGame()
+  }
 }
 
 function keyPressed() {
   // TODO: Check for 'R' key to restart game
   // HINT: Use key === 'r' || key === 'R'
   // Only works when game is over
+  if (key === 'r' || key === 'R'){
+    if(gameOver){
+      resetGame()
+    }
+  }
 }
 
 // Helper function you might need
 function distance(x1, y1, x2, y2) {
   return dist(x1, y1, x2, y2);
 }
+
+// function resetScreen(){
+//   if (obstacleHits>=3){
+//     textSize(45)
+//     text("GAME OVER",width/2,height/2)
+//   }
+// }

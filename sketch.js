@@ -109,7 +109,11 @@ function checkCoinCollection() {
   //   - Increase score
   //   - Create new coin
   //   - Increase obstacle speed slightly
-  
+  if(dist(playerX,playerY,coinX,coinY)<=20){
+    initializeGame()
+    obstacleSpeed+=0.5
+    score+=1
+  }
 }
 
 function checkCollisions() {
